@@ -1,0 +1,54 @@
+body {
+	font-family: "Zapfino", serif;
+	font-size: 1em;
+	margin: 2em 0 0 2em;
+}
+
+.parchment-top {
+	background-image: url('images/parchment-main.png');
+	background-repeat: repeat-y;
+	position: relative;
+	width: 70%;
+	top: 25px;
+}
+
+.parchment {
+	background-image: url('images/parchment-top.png');
+	background-repeat: no-repeat;
+	height: 38px;
+	position: relative;
+	top: -25px;
+	width: 100%;
+}
+
+.parchment-bottom {
+	background-image: url('images/parchment-bottom.png');
+	background-repeat: no-repeat;	
+	bottom: -18px;
+	height: 38px;
+	margin-bottom: 40px;
+	position: relative;
+	right: -6px;
+	width: 100%;
+}
+
+.parchment-body {
+	padding: 1px 60px 2px 60px;
+	width: 60%;
+}
+
+h3 {
+	font-size: 1.5em;
+	font-weight: 800;
+	margin: 2em 0 -0.5em 0;
+}
+
+.ending {
+	font-family: "Garamond", serif;
+	font-size: 1.5em;
+	font-style: italic;
+	font-weight: 800;
+	margin: 3em 0 1.5em 0;
+	max-width: 50%;	
+	text-align: center
+}
