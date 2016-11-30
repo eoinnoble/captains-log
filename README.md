@@ -4,13 +4,14 @@ For [NaNoGenMo 2016](https://github.com/NaNoGenMo/2016).
 _Captain’s Log_ generates 50,000+ words of luckless captains and their endeavours in the style of [Emily Short](https://emshort.blog/)’s superlative [Annals of the Parrigues](https://drive.google.com/file/d/0B97d5C256qbrOHFwSUhsZE4tU0k/view?usp=sharing).
 
 _Captain’s Log_ does the following:
+
 1. Pick a random captain and ship from curated lists.
 2. Pick a random starting location from a collection of geo-tagged East India Company ports.
 3. Search through all the other locations for the nearest one and calculate the cardinal direction.
 4. Set sail!
-* occasionally encountering hostile vessels
-* usually arriving at the specified destination
-* always ending with tragedy
+  * occasionally encountering hostile vessels
+  * usually arriving at the specified destination
+  * always ending with tragedy
 5. Rinse, repeat.
 6. Output it all to an HTML file.
 
