@@ -8,9 +8,9 @@ _Captain’s Log_ does the following:
 2. Pick a random starting location from a collection of geo-tagged East India Company ports.
 3. Search through all the other locations for the nearest one and calculate the cardinal direction.
 4. Set sail!
-- occasionally encountering hostile vessels
-- usually arriving at the specified destination
-- always ending with tragedy
+* occasionally encountering hostile vessels
+* usually arriving at the specified destination
+* always ending with tragedy
 5. Rinse, repeat.
 6. Output it all to an HTML file.
 
