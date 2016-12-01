@@ -8,7 +8,7 @@ body {
 	background-image: url('images/parchment-main.png');
 	background-repeat: repeat-y;
 	position: relative;
-	width: 70%;
+	width: 730px;
 	top: 25px;
 }
 
@@ -34,7 +34,7 @@ body {
 
 .parchment-body {
 	padding: 1px 60px 2px 60px;
-	width: 60%;
+	width: 85%;
 }
 
 h3 {
@@ -49,6 +49,6 @@ h3 {
 	font-style: italic;
 	font-weight: 800;
 	margin: 3em 0 1.5em 0;
-	max-width: 50%;	
+	max-width: 730px;
 	text-align: center
 }
