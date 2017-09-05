@@ -1,19 +1,19 @@
 # Captain’s Log
 For [NaNoGenMo 2016](https://github.com/NaNoGenMo/2016).
 
-_Captain’s Log_ generates 50,000+ words of luckless captains and their endeavours in the style of [Emily Short](https://emshort.blog/)’s superlative [Annals of the Parrigues](https://drive.google.com/file/d/0B97d5C256qbrOHFwSUhsZE4tU0k/view?usp=sharing).
+_Captain’s Log_ generates an arbitrary number of words of luckless captains and their endeavours in the style of [Emily Short](https://emshort.blog/)’s superlative [Annals of the Parrigues](https://drive.google.com/file/d/0B97d5C256qbrOHFwSUhsZE4tU0k/view?usp=sharing).
 
-_Captain’s Log_ does the following:
+To generate output you can type `python captains_log.py` in the command line and you will be prompted to provide a wordcount. _Captain’s Log_ then does the following:
 
-1. Pick a random captain and ship from curated lists.
-2. Pick a random starting location from a collection of geo-tagged East India Company ports.
-3. Search through all the other locations for the nearest one and calculate the cardinal direction.
-4. Set sail!
+1. Picks a random captain and ship from curated lists.
+2. Picks a random starting location from a collection of geo-tagged East India Company ports.
+3. Searches through all the other locations for the nearest one and calculate the cardinal direction.
+4. Sets sail!
   * occasionally encountering hostile vessels
   * usually arriving at the specified destination
   * always ending with tragedy
-5. Rinse, repeat.
-6. Output it all to an HTML file.
+5. Rinses, repeats.
+6. Outputs it all to an HTML file.
 
 You can see the latest output [here](https://github.com/eoinnoble/captains-log/blob/master/output/captains-log.html), but I don’t recommend you read through it in its entirety. Instead, I’ve picked out some key pieces below:
 

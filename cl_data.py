@@ -5,63 +5,71 @@ Created on Tue Nov 15 21:16:04 2016
 @author: enoble
 """
 
-import cl_funcs
+import io
+
+
+def get_file(file_name):
+    """Takes a file name (string), reads the file line by line and saves it to a list, which it then returns."""
+
+    with io.open(file_name, 'r', encoding='utf-8') as my_file:
+        return my_file.read().split('\n')
+
 
 # Dictionary of ship types and sizes, 0 being smallest, 3 being largest
 ship_types = {
-    "argosy": 1,
-    "barque": 3,
-    "barquentine": 2,
-    "bergantina": 2,
-    "bilander": 0,
-    "brig": 2,
-    "brigantine": 2,
-    "carrack": 3,
-    "cog": 2,
-    "corvette": 0,
-    "Dutch clipper": 2,
-    "East Indiaman": 2,
-    "fluyt": 3,
-    "fly-boat": 3,
-    "frigate": 2,
-    "galleon": 3,
-    "gallivat": 0,
-    "howker": 0,
-    "lorcha": 0,
-    "lugger": 0,
-    "man o‘ war": 3,
-    "pinnace": 0,
-    "polacre": 0,
-    "schooner": 1,
-    "ship of the line": 3,
-    "xebec": 0
+    'argosy': 1,
+    'barque': 3,
+    'barquentine': 2,
+    'bergantina': 2,
+    'bilander': 0,
+    'brig': 2,
+    'brigantine': 2,
+    'carrack': 3,
+    'cog': 2,
+    'corvette': 0,
+    'Dutch clipper': 2,
+    'East Indiaman': 2,
+    'fluyt': 3,
+    'fly-boat': 3,
+    'frigate': 2,
+    'galleon': 3,
+    'gallivat': 0,
+    'howker': 0,
+    'lorcha': 0,
+    'lugger': 0,
+    'man o‘ war': 3,
+    'pinnace': 0,
+    'polacre': 0,
+    'schooner': 1,
+    'ship of the line': 3,
+    'xebec': 0
 }
 
 # List of ship weapons, corresponds to the different ship sizes (0, 1, 2, 3)
-ship_weapons = ["a single cannon", "a handful of cannon", "a dozen cannon", "dozens of cannon"]
+ship_weapons = ['a single cannon', 'a handful of cannon', 'a dozen cannon', 'dozens of cannon']
 
 # List of flags
-flags = cl_funcs.get_file("data/names-flags.txt")
+flags = get_file('data/names-flags.txt')
 
 # List of ship names
-ship_names = cl_funcs.get_file("data/names-ship.txt")
+ship_names = get_file('data/names-ship.txt')
     
 # Lists of things to describe small enemies
-enemy_small_verb = ["running for their lives", "fleeing as fast as their sails could carry them"]
-enemy_small_adj = ["puny", "trifling", "small", "yapping", "laughable", "insignificant"]
+enemy_small_verb = ['running for their lives', 'fleeing as fast as their sails could carry them']
+enemy_small_adj = ['puny', 'trifling', 'small', 'yapping', 'laughable', 'insignificant']
 
 # Lists of things to describe large enemies
-enemy_large_verb = ["bearing down on us", "coming fast at us", "seeming to fly towards us"]
-enemy_large_adj = ["formidable", "imposing", "fearsome", "threatening"]
+enemy_large_verb = ['bearing down on us', 'coming fast at us', 'seeming to fly towards us']
+enemy_large_adj = ['formidable', 'imposing', 'fearsome', 'threatening']
 
 # Lists of things to describe equally-matched enemies
-enemy_equal_adj = ["evenly matched", "comparable", "similarly sized"]
+enemy_equal_adj = ['evenly matched', 'comparable', 'similarly sized']
 
 # List of captain names
-captain_names = cl_funcs.get_file("data/names-captain.txt")
+captain_names = get_file('data/names-captain.txt')
 
 # List of place names
-place_names = cl_funcs.get_file("data/names-places.txt")
+place_names = get_file('data/names-places.txt')
 
 # List of places and longlat coords
 place_coords = {
@@ -250,37 +258,37 @@ place_coords = {
 canonical_place_coords = place_coords.copy()
 
 # Descriptions of unfavourable winds
-wind_bad = cl_funcs.get_file("data/wind-bad.txt")
+wind_bad = get_file('data/wind-bad.txt')
 
 # Descriptions of favourable winds
-wind_good = cl_funcs.get_file("data/wind-good.txt")
+wind_good = get_file('data/wind-good.txt')
 
 # Negative adjectives applicable to people
-personality_bad = cl_funcs.get_file("data/personality-bad.txt")
+personality_bad = get_file('data/personality-bad.txt')
 
 # Positive adjectives applicable to people
-personality_good = cl_funcs.get_file("data/personality-good.txt")
+personality_good = get_file('data/personality-good.txt')
 
-# Phrases synonymous with "known for"
-known_for = cl_funcs.get_file("data/known-for.txt")
+# Phrases synonymous with 'known for'
+known_for = get_file('data/known-for.txt')
 
 # Negative adjectives applicable to objects/things
-objects_bad = cl_funcs.get_file("data/objects-bad.txt")
+objects_bad = get_file('data/objects-bad.txt')
 
 # Positive adjectives applicable to objects/things
-objects_good = cl_funcs.get_file("data/objects-good.txt")
+objects_good = get_file('data/objects-good.txt')
 
 # List of objects
-objects = cl_funcs.get_file("data/objects.txt")
+objects = get_file('data/objects.txt')
 
 # List of purchaseable items
-items = cl_funcs.get_file("data/items.txt")
+items = get_file('data/items.txt')
 
 # List of phrases about running low on provisions
-provisions_low = cl_funcs.get_file("data/provisions-low.txt")
+provisions_low = get_file('data/provisions-low.txt')
 
 # List of phrases about running low on rum
-rum_low = cl_funcs.get_file("data/rum-low.txt")
+rum_low = get_file('data/rum-low.txt')
 
 # List of phrases about naval vicotry
-victory = cl_funcs.get_file("data/victory.txt")
+victory = get_file('data/victory.txt')

@@ -1,5 +1,5 @@
 body {
-	font-family: "Zapfino", serif;
+	font-family: "Zapfino", "Tangerine", cursive;
 	font-size: 1em;
 	margin: 2em 0 0 2em;
 }
@@ -39,7 +39,7 @@ body {
 
 h3 {
 	font-size: 1.5em;
-	font-weight: 800;
+	font-weight: 700;
 	margin: 2em 0 -0.5em 0;
 }
 
