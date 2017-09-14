@@ -5,12 +5,16 @@ Created on Tue Nov 15 21:50:44 2016
 @author: enoble
 """
 
+import inflect
 import random
+
 import cl_data
 
 
 class Captain:
     """Generate a captain with random name and attributes (ranging from 0–100)"""
+
+    num_instances = 0
 
     def __init__(self):
         self.name = random.choice(cl_data.captain_names)
@@ -21,10 +25,18 @@ class Captain:
         self.navigator = random.randint(0, 100)
         self.diplomat = random.randint(0, 100)
         self.merchant = random.randint(0, 100)
+        Captain.num_instances = Captain.num_instances + 1
 
     def __repr__(self):
         return ',\n'.join(sorted(['{0} => {1}'.format(key, getattr(self, key)) for key in self.__dict__]))
-        
+
+    @staticmethod
+    def return_count():
+        if Captain.num_instances:
+            p = inflect.engine()
+            return str(p.number_to_words(Captain.num_instances)) + ' ' + p.plural('captain', Captain.num_instances)
+        else:
+            return ""
 
 if __name__ == '__main__':
     test = Captain()

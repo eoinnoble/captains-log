@@ -5,10 +5,12 @@ Created on Sat Oct 29 09:25:05 2016
 @author: enoble
 """
 
+import inflect
 import random
 
 import cl_data
-import cl_funcs
+
+from cl_funcs import begins_with_vowel
 
 
 # All ships have a type and a size
@@ -22,6 +24,14 @@ class Ship:
 # Our hero's ship has some extra attributes
 class Vessel(Ship):
 
+    # Keep track of some stats for the end
+    num_instances = 0
+    sinkings = {
+        'combat':     0,
+        'sobriety':   0,
+        'starvation': 0
+    }
+
     def __init__(self):
         Ship.__init__(self)
         self.crew_health = (20 * self.size) + 40
@@ -32,10 +42,27 @@ class Vessel(Ship):
         self.coffers = 40
         self.name = random.choice(cl_data.ship_names)
         self.destroyed = False
+        Vessel.num_instances = Vessel.num_instances + 1
 
     def __str__(self):
         self.description = 'We sail on the ' + self.type + ' “' + self.name + '”.'
         return self.description
+
+    @staticmethod
+    def sunk(cause):
+        getattr(Vessel, 'sinkings')[cause] += 1
+
+    @staticmethod
+    def return_count():
+        p = inflect.engine()
+        res = 'and lost:<br/>'
+
+        for key in Vessel.sinkings:
+            if Vessel.sinkings[key]:
+                res += '– ' + str(p.number_to_words(Vessel.sinkings[key])) + \
+                       ' ' + ' to ' + key + '<br/>'
+
+        return res
 
 
 # Enemy vessels have different attribute from our hero's vessel
@@ -55,8 +82,8 @@ class Enemy(Ship):
         else:
             self.adj = random.choice(cl_data.enemy_equal_adj)
             
-        self.description = ('We came across ' + cl_funcs.begins_with_vowel(self.adj) + ' ' + self.adj + ' ' +
-                            self.type + ' with ' + self.cannon + ', flying ' + cl_funcs.begins_with_vowel(self.flag) +
+        self.description = ('We came across ' + begins_with_vowel(self.adj) + ' ' + self.adj + ' ' +
+                            self.type + ' with ' + self.cannon + ', flying ' + begins_with_vowel(self.flag) +
                             ' ' + self.flag + ' flag, ' + self.verb + '.')
         
     def __str__(self):
@@ -67,4 +94,7 @@ if __name__ == '__main__':
     us = Vessel()
     them = Enemy(us)
     assert us.name and them.flag  # These require files to be accessed
+    assert us.return_count('num_instances') == 1
+    us.sunk("combat")
+    assert Vessel.combat == 1
     print(us, them)
