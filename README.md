@@ -9,9 +9,9 @@ To generate output you can type `python captains_log.py` in the command line and
 2. Picks a random starting location from a collection of geo-tagged East India Company ports.
 3. Searches through all the other locations for the nearest one and calculate the cardinal direction.
 4. Sets sail!
-  * occasionally encountering hostile vessels
-  * usually arriving at the specified destination
-  * always ending with tragedy
+    * occasionally encountering hostile vessels
+    * usually arriving at the specified destination
+    * always ending with tragedy
 5. Rinses, repeats.
 6. Outputs it all to an HTML file.
 

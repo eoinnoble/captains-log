@@ -34,9 +34,9 @@ cardinals = RangeDict({
     range(203, 248): "northeast",
     range(158, 203): "east",
     range(113, 158): "southeast",
-    range(68, 113):  "south",
-    range(23, 68):   "southwest",
-    range(0, 23):    "west"
+    range(68,  113): "south",
+    range(23,  68):  "southwest",
+    range(0,   23):  "west"
 })
 
 
@@ -77,10 +77,10 @@ def choose_destination(location, places, visited):
 
     destination = ("", inf)
 
-    for place in set(places):
-        distance = int(round(calc_distance(places[location], places[place])))
-        if location != place and distance < destination[1] and place not in visited:
-            destination = (place, distance)
+    for candidate in places:
+        distance = int(round(calc_distance(places[location], places[candidate])))
+        if location != candidate and distance < destination[1] and candidate not in visited:
+            destination = (candidate, distance)
 
     return destination
 
@@ -93,7 +93,6 @@ def get_direction(location, destination, places):
     y_diff = places[destination][1] - places[location][1]
 
     # Return a cardinal direction
-    angle = degrees(atan2(y_diff, x_diff)) + 180
     return cardinals[int(degrees(atan2(y_diff, x_diff)) + 180)]
 
 

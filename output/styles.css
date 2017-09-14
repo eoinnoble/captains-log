@@ -43,7 +43,7 @@ h3 {
 	margin: 2em 0 -0.5em 0;
 }
 
-.ending {
+.ending, .stats {
 	font-family: "Garamond", serif;
 	font-size: 1.5em;
 	font-style: italic;
@@ -51,4 +51,9 @@ h3 {
 	margin: 3em 0 1.5em 0;
 	max-width: 730px;
 	text-align: center
+}
+
+.stats {
+    margin: 0 0 1.5em 0;
+    text-align: left
 }
