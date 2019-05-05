@@ -1,4 +1,4 @@
 arrow
 bs4
-inflect
 geopy
+inflect
