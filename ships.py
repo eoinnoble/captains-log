@@ -1,21 +1,13 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Oct 29 09:25:05 2016
-
-@author: enoble
-"""
-
-import inflect
 import random
 
-import cl_data
+import inflect
 
+import cl_data
 from cl_funcs import begins_with_vowel
 
 
 # All ships have a type and a size
 class Ship:
-
     def __init__(self):
         self.type = random.choice(list(cl_data.ship_types.keys()))
         self.size = cl_data.ship_types[self.type]
@@ -26,11 +18,7 @@ class Vessel(Ship):
 
     # Keep track of some stats for the end
     num_instances = 0
-    sinkings = {
-        'combat':     0,
-        'sobriety':   0,
-        'starvation': 0
-    }
+    sinkings = {"combat": 0, "sobriety": 0, "starvation": 0}
 
     def __init__(self):
         Ship.__init__(self)
@@ -45,29 +33,27 @@ class Vessel(Ship):
         Vessel.num_instances = Vessel.num_instances + 1
 
     def __str__(self):
-        self.description = 'We sail on the ' + self.type + ' “' + self.name + '”.'
+        self.description = f"We sail on the {self.type} “{self.name}”."
         return self.description
 
     @staticmethod
     def sunk(cause):
-        getattr(Vessel, 'sinkings')[cause] += 1
+        getattr(Vessel, "sinkings")[cause] += 1
 
     @staticmethod
     def return_count():
         p = inflect.engine()
-        res = 'and lost:<br/>'
+        res = "and lost:<br/>"
 
         for key in Vessel.sinkings:
             if Vessel.sinkings[key]:
-                res += '– ' + str(p.number_to_words(Vessel.sinkings[key])) + \
-                       ' ' + ' to ' + key + '<br/>'
+                res += f"– {p.number_to_words(Vessel.sinkings[key])} to {key}<br/>"
 
         return res
 
 
 # Enemy vessels have different attribute from our hero's vessel
 class Enemy(Ship):
-
     def __init__(self, our_ship):
         Ship.__init__(self)
         self.attacking = self.size >= our_ship.size
@@ -81,20 +67,21 @@ class Enemy(Ship):
             self.adj = random.choice(cl_data.enemy_large_adj)
         else:
             self.adj = random.choice(cl_data.enemy_equal_adj)
-            
-        self.description = ('We came across ' + begins_with_vowel(self.adj) + ' ' + self.adj + ' ' +
-                            self.type + ' with ' + self.cannon + ', flying ' + begins_with_vowel(self.flag) +
-                            ' ' + self.flag + ' flag, ' + self.verb + '.')
-        
+
+        self.description = (
+            f"We came across {begins_with_vowel(self.adj)} {self.adj} {self.type} with "
+            f"{self.cannon}, flying {begins_with_vowel(self.flag)} {self.flag} flag, {self.verb}."
+        )
+
     def __str__(self):
         return self.description
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     us = Vessel()
     them = Enemy(us)
     assert us.name and them.flag  # These require files to be accessed
-    assert us.return_count('num_instances') == 1
+    assert us.return_count("num_instances") == 1
     us.sunk("combat")
     assert Vessel.combat == 1
     print(us, them)
