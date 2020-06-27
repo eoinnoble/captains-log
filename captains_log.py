@@ -1,4 +1,5 @@
 import codecs
+import itertools
 import random
 import re
 import textwrap
@@ -47,7 +48,8 @@ PARCHMENT_END = textwrap.dedent(
     </div>
     """
 )
-# Initialise the place variables
+
+# Initialise data
 PERSONALITIES = {
     "good": cl_data.personality_good,
     "bad": cl_data.personality_bad,
@@ -56,6 +58,8 @@ OBJECTS = {
     "good": cl_data.objects_good,
     "bad": cl_data.objects_bad,
 }
+PROVISIONS_LOW = itertools.cycle(cl_data.provisions_low)
+RUM_LOW = itertools.cycle(cl_data.rum_low)
 
 
 def start() -> Tuple[
@@ -91,10 +95,10 @@ def handle_provisions(ship: ships.Vessel) -> Tuple[bool, str]:
 
     if ship.provisions < 0:
         ship.crew_health -= 20
-        log += f"{random.choice(cl_data.provisions_low)} "
+        log += f"{next(PROVISIONS_LOW)} "
     elif ship.rum < 0:
         ship.crew_sanity -= 20
-        log += f"{random.choice(cl_data.rum_low)} "
+        log += f"{next(RUM_LOW)} "
 
     # Make sure the crew are alive and sane...
     if ship.destroyed:
