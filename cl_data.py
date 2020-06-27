@@ -1,9 +1,8 @@
-def get_file(file_name):
+def get_file(file_name: str) -> list:
     """
     Takes a file name (string), reads the file line by line and saves it to a list,
     which it then returns.
     """
-
     with open(file_name, "r", encoding="utf-8") as my_file:
         return my_file.read().split("\n")
 
@@ -30,7 +29,7 @@ ship_types = {
     "howker": 0,
     "lorcha": 0,
     "lugger": 0,
-    "man o‘ war": 3,
+    "man o’ war": 3,
     "pinnace": 0,
     "polacre": 0,
     "schooner": 1,
@@ -54,10 +53,22 @@ ship_names = get_file("data/names-ship.txt")
 
 # Lists of things to describe small enemies
 enemy_small_verb = [
-    "running for their lives",
+    "running for their very lives",
     "fleeing as fast as their sails could carry them",
+    "making fast for open water",
 ]
-enemy_small_adj = ["puny", "trifling", "small", "yapping", "laughable", "insignificant"]
+enemy_small_adj = [
+    "diminutive",
+    "feeble",
+    "homuncular",
+    "insignificant",
+    "laughable",
+    "pint-sized",
+    "puny",
+    "trifling",
+    "small",
+    "yapping",
+]
 
 # Lists of things to describe large enemies
 enemy_large_verb = [
@@ -65,16 +76,28 @@ enemy_large_verb = [
     "coming fast at us",
     "seeming to fly towards us",
 ]
-enemy_large_adj = ["formidable", "imposing", "fearsome", "threatening"]
+enemy_large_adj = [
+    "awesome," "daunting",
+    "fearsome",
+    "forbidding",
+    "formidable",
+    "imposing",
+    "intimidating",
+    "menacing",
+    "threatening",
+]
 
 # Lists of things to describe equally-matched enemies
-enemy_equal_adj = ["evenly matched", "comparable", "similarly sized"]
+enemy_equal_adj = [
+    "approximate",
+    "comparable",
+    "equivalent",
+    "evenly matched",
+    "similarly sized",
+]
 
 # List of captain names
 captain_names = get_file("data/names-captain.txt")
-
-# List of place names
-place_names = get_file("data/names-places.txt")
 
 # List of places and longlat coords
 place_coords = {
@@ -257,6 +280,9 @@ place_coords = {
     "Quilon": (8.8870941, 76.5906837),
     "Tiku": (54.9944056, 82.4427018),
 }
+
+# List of place names
+place_names = list(place_coords.keys())
 
 # Make a copy of these coords so we can come back to them if we run out
 # of locations to visit

@@ -1,10 +1,11 @@
 body {
 	font-family: "Zapfino", "Tangerine", cursive;
-	font-size: 1em;
-	margin: 2em 0 0 2em;
+	font-size: 30px;
+	font-weight: 700;
+	margin: 2rem 0 0 2rem;
 }
 
-.parchment-top {
+.parchment {
 	background-image: url('images/parchment-main.png');
 	background-repeat: repeat-y;
 	position: relative;
@@ -12,7 +13,7 @@ body {
 	top: 25px;
 }
 
-.parchment {
+.parchment-top {
 	background-image: url('images/parchment-top.png');
 	background-repeat: no-repeat;
 	height: 38px;
@@ -23,7 +24,7 @@ body {
 
 .parchment-bottom {
 	background-image: url('images/parchment-bottom.png');
-	background-repeat: no-repeat;	
+	background-repeat: no-repeat;
 	bottom: -18px;
 	height: 38px;
 	margin-bottom: 40px;
@@ -38,22 +39,33 @@ body {
 }
 
 h3 {
-	font-size: 1.5em;
+	font-size: 3rem;
 	font-weight: 700;
-	margin: 2em 0 -0.5em 0;
+	margin: 2rem 0 0 0;
+}
+
+.parchment-body h3:first-child {
+	margin: 0;
 }
 
 .ending, .stats {
 	font-family: "Garamond", serif;
-	font-size: 1.5em;
+	font-size: 1.5rem;
 	font-style: italic;
 	font-weight: 800;
-	margin: 3em 0 1.5em 0;
+	margin: 3rem 0 1.5rem 0;
 	max-width: 730px;
 	text-align: center
 }
 
 .stats {
-    margin: 0 0 1.5em 0;
     text-align: left
+}
+
+p.stats {
+	margin: 0;
+}
+
+ul.stats {
+	margin: 0 0 1.5rem 0;
 }
