@@ -40,7 +40,7 @@ I am grateful to [firesign24-7][11] for the use of her [Aged paper texture][12].
 [1]: <https://github.com/NaNoGenMo/2016>
 [2]: <https://emshort.blog/>
 [3]: <https://drive.google.com/file/d/0B97d5C256qbrOHFwSUhsZE4tU0k/view?usp=sharing>
-[4]: <https://github.com/eoinnoble/captains-log/blob/master/output/captains-log.html>
+[4]: <https://eoinnoble.github.io/captains-log/output/captains-log>
 [5]: <https://github.com/eoinnoble/captains-log/blob/master/output/images/cl1.jpg>
 [6]: <https://github.com/eoinnoble/captains-log/blob/master/output/images/cl2.jpg>
 [7]: <https://github.com/eoinnoble/captains-log/blob/master/output/images/cl3.jpg>
