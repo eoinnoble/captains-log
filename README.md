@@ -43,7 +43,7 @@ I am grateful to [firesign24-7][11] for the use of her [Aged paper texture][12].
 [4]: <https://github.com/eoinnoble/captains-log/blob/master/output/captains-log.html>
 [5]: <https://github.com/eoinnoble/captains-log/blob/master/output/images/cl1.jpg>
 [6]: <https://github.com/eoinnoble/captains-log/blob/master/output/images/cl2.jpg>
-[7]: <(https://github.com/eoinnoble/captains-log/blob/master/output/images/cl3.jpg)>
+[7]: <https://github.com/eoinnoble/captains-log/blob/master/output/images/cl3.jpg>
 [8]: <https://github.com/eoinnoble/captains-log/blob/master/output/images/cl4.jpg>
 [9]: <https://github.com/eoinnoble/captains-log/blob/master/output/images/cl5.jpg>
 [10]: <https://github.com/eoinnoble/captains-log/blob/master/output/images/cl6.jpg>
