@@ -119,10 +119,11 @@ def do_combat_encounter(ship: OurShip) -> Tuple[bool, str]:
         # If we do, we set the crew health to zero, log a solemn
         # message and break out of the loop
         if destruction > 50:
+            ship.crew_health = 0
             ship.sink("combat")
             log += (
                 f"{markup.parchment_end}\n\n<p class='ending'>Thus ends the tale of the "
-                f"“{ship.name}” and her captain, {ship.name} "
+                f"“{ship.name}” and her captain, {ship.captain.name} "
                 f"– both lost fighting {begins_with_vowel(enemy.type)} "
                 f"{enemy.type}. All we recovered was this weather-beaten log "
                 "book…</p>"
@@ -191,13 +192,13 @@ def do_travel(
         day_log_entry += provision_log
         if sunk:
             log += day_log_entry
-            return log, date_already_logged
+            break
 
         sunk, encounter_log = do_encounter(ship)
         day_log_entry += encounter_log
         if sunk:
             log += day_log_entry
-            return log, date_already_logged
+            break
 
         wind = navigation.check_wind(ship.captain)
         distance_travelled = 125 * wind[0]
@@ -235,7 +236,7 @@ def run_captain(
 
         # We have arrived!
         if ship.destroyed:
-            return log
+            break
 
         if not date_already_logged:
             log += f"\n{get_date(date)}"
