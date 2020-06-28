@@ -2,11 +2,11 @@ import random
 from math import atan2, degrees, inf
 from typing import Tuple
 
-from arrow import Arrow, get
 from geopy.distance import great_circle
 
-import cl_data
+import data
 from captains import Captain
+from ships import OurShip
 
 
 class RangeDict(dict):
@@ -42,13 +42,6 @@ CARDINAL_DIRECTIONS = RangeDict(
 )
 
 
-def begins_with_vowel(word: str) -> str:
-    """
-    Returns the correct indefinite article depending on the starting letter of the word
-    """
-    return "an" if word[0].lower() in "aeiou" else "a"
-
-
 def check_wind(captain: Captain) -> Tuple[float, str]:
     """
     Rolls on the wind table to see if this is beneficial or detrimental to sailing.
@@ -64,11 +57,11 @@ def check_wind(captain: Captain) -> Tuple[float, str]:
         if roll <= 25:
             return 0.5, ""
         elif roll >= 90:
-            return 2.0, random.choice(cl_data.wind_good)
+            return 2.0, random.choice(data.wind_good)
         else:
             return 1.0, ""
     else:
-        return 0, random.choice(cl_data.wind_bad)
+        return 0, random.choice(data.wind_bad)
 
 
 def calc_distance(location: Tuple[int, int], destination: Tuple[int, int]) -> float:
@@ -78,7 +71,7 @@ def calc_distance(location: Tuple[int, int], destination: Tuple[int, int]) -> fl
     return great_circle(location, destination).miles
 
 
-def choose_destination(location: str, places: dict, visited: list) -> Tuple[str, float]:
+def choose_destination(location: str, places: dict, visited: set) -> Tuple[str, float]:
     """
     Calculate the closest place to our current location and make sure we haven't visited it before
     """
@@ -107,43 +100,52 @@ def get_direction(location: str, destination: str, places: dict) -> str:
     return CARDINAL_DIRECTIONS[int(degrees(atan2(y_diff, x_diff)) + 180)]
 
 
-def get_date(date: Arrow) -> str:
+def get_new_heading(
+    location: str, all_coords: dict, visited_locations: set
+) -> Tuple[str, float, str]:
     """
-    Formats a date object for inclusion in our output text.
+    Calculates a new destination
     """
-    return f"\n<h3 class='date'>{date.format('MMMM')} {date.format('Do')}, {str(date.year)}</h3>\n"
+    new_destination, new_distance = choose_destination(
+        location, all_coords, visited_locations
+    )
+    new_direction = get_direction(location, new_destination, all_coords)
+    log = (
+        f"<span>We set sail from {location}, heading {new_direction} "
+        f"to {new_destination}. </span>"
+    )
+    return new_destination, new_distance, log
 
 
 if __name__ == "__main__":
-    # begins_with_vowel
-    assert begins_with_vowel("Dog") == "a"
-    assert begins_with_vowel("Apple") == "an"
-
     # check_wind
     speed, description = check_wind(Captain())
     assert type(speed) is float
     if description:
-        assert description in [*cl_data.wind_good, *cl_data.wind_bad]
+        assert description in [*data.wind_good, *data.wind_bad]
 
     # calc_distance
     assert calc_distance((1, 2), (2, 1)) == 97.69549216497437
 
     # choose_destination
-    destination, distance = choose_destination("Tainan", cl_data.place_coords, [])
+    destination, distance = choose_destination("Tainan", data.place_coords, set())
     assert destination == "Anping", destination
     assert distance == 1, distance
 
     destination, distance = choose_destination(
-        "Tainan", cl_data.place_coords, ["Anping"]
+        "Tainan", data.place_coords, set(["Anping"])
     )
     assert destination == "Wang-an", destination
     assert distance == 60, distance
 
     # get_direction
-    direction = get_direction("Tainan", "Anping", cl_data.place_coords)
+    direction = get_direction("Tainan", "Anping", data.place_coords)
     assert direction == "southeast", direction
 
-    # get_date
-    date = get("1767-01-01", "YYYY-MM-DD")
-    formatted = get_date(date)
-    assert formatted == "\n<h3 class='date'>January 1st, 1767</h3>\n", formatted
+    # get_new_heading
+    captain = Captain()
+    ship = OurShip(captain)
+    destination, distance, log = get_new_heading(
+        data.place_names[0], data.place_coords, ship.visited
+    )
+    assert log.startswith("<span>") and log.endswith("</span>")

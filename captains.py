@@ -2,7 +2,7 @@ import random
 
 import inflect
 
-import cl_data
+import data
 
 
 class Captain:
@@ -18,7 +18,7 @@ class Captain:
         self.fighter = random.randint(0, 101)
         self.health = random.randint(0, 101)
         self.merchant = random.randint(0, 101)
-        self.name = random.choice(cl_data.captain_names)
+        self.name = random.choice(data.captain_names)
         self.navigator = random.randint(0, 101)
         self.sanity = random.randint(0, 101)
 

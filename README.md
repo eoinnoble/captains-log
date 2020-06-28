@@ -1,5 +1,7 @@
 # Captain’s Log
 
+![Guaranteed to run on versions of Python 3](https://img.shields.io/badge/python-v3.x-blue)
+
 For [NaNoGenMo 2016][1].
 
 _Captain’s Log_ generates an arbitrary number of words of luckless captains and their endeavours in
@@ -12,7 +14,7 @@ prompted to provide a wordcount. _Captain’s Log_ then does the following:
 2. Picks a random starting location from a collection of geo-tagged East India Company ports.
 3. Searches through all the other locations for the nearest one and calculate the cardinal direction.
 4. Sets sail!
-    * occasionally encountering hostile vessels
+    * occasionally encountering hostile OurShips
     * usually arriving at the specified destination
     * always ending with tragedy
 5. Rinses, repeats.

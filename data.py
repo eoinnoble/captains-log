@@ -1,10 +1,4 @@
-def get_file(file_name: str) -> list:
-    """
-    Takes a file name (string), reads the file line by line and saves it to a list,
-    which it then returns.
-    """
-    with open(file_name, "r", encoding="utf-8") as my_file:
-        return my_file.read().split("\n")
+from utils import get_file
 
 
 # Dictionary of ship types and sizes, 0 being smallest, 3 being largest
