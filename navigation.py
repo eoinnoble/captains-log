@@ -1,9 +1,12 @@
 import random
 from math import atan2, degrees, inf
+from typing import Tuple
 
 from geopy.distance import great_circle
 
-import cl_data
+import data
+from captains import Captain
+from ships import OurShip
 
 
 class RangeDict(dict):
@@ -24,7 +27,7 @@ class RangeDict(dict):
 
 
 # Would be quicker to have this as a 360-key dictionary, but this feels neater
-cardinals = RangeDict(
+CARDINAL_DIRECTIONS = RangeDict(
     {
         range(338, 361): "west",
         range(293, 338): "northwest",
@@ -39,15 +42,7 @@ cardinals = RangeDict(
 )
 
 
-def begins_with_vowel(word):
-    """
-    Returns the correct indefinite article depending on the starting letter of the word
-    """
-
-    return "an" if word[0].lower() in "aeiou" else "a"
-
-
-def check_wind(captain):
+def check_wind(captain: Captain) -> Tuple[float, str]:
     """
     Rolls on the wind table to see if this is beneficial or detrimental to sailing.
 
@@ -55,7 +50,6 @@ def check_wind(captain):
     containing: a floating point number that acts as a speed modifier, and a wind description if
     relevant
     """
-
     roll = random.randint(0, 100)
 
     if roll:  # No captain can avoid being becalmed
@@ -63,26 +57,24 @@ def check_wind(captain):
         if roll <= 25:
             return 0.5, ""
         elif roll >= 90:
-            return 2.0, random.choice(cl_data.wind_good)
+            return 2.0, random.choice(data.wind_good)
         else:
             return 1.0, ""
     else:
-        return 0, random.choice(cl_data.wind_bad)
+        return 0, random.choice(data.wind_bad)
 
 
-def calc_distance(location, destination):
+def calc_distance(location: Tuple[int, int], destination: Tuple[int, int]) -> float:
     """
     Calculate the great-circle distance between two points. Expects two tuples of longlat numbers
     """
-
     return great_circle(location, destination).miles
 
 
-def choose_destination(location, places, visited):
+def choose_destination(location: str, places: dict, visited: set) -> Tuple[str, float]:
     """
     Calculate the closest place to our current location and make sure we haven't visited it before
     """
-
     destination = ("", inf)
 
     for candidate in places:
@@ -97,24 +89,63 @@ def choose_destination(location, places, visited):
     return destination
 
 
-def get_direction(location, destination, places):
+def get_direction(location: str, destination: str, places: dict) -> str:
     """
     Get cardinal direction from location to destination. Expects two place names (strings) and a
     corresponding dictionary of longlat values – {place: (long, lat), etc}
     """
-
     x_diff = places[destination][0] - places[location][0]
     y_diff = places[destination][1] - places[location][1]
 
-    # Return a cardinal direction
-    return cardinals[int(degrees(atan2(y_diff, x_diff)) + 180)]
+    return CARDINAL_DIRECTIONS[int(degrees(atan2(y_diff, x_diff)) + 180)]
 
 
-def get_date(date):
-
-    return f"\n<h3 class='date'>{date.format('MMMM')}, {str(date.year)}</h3>\n"
+def get_new_heading(
+    location: str, all_coords: dict, visited_locations: set
+) -> Tuple[str, float, str]:
+    """
+    Calculates a new destination
+    """
+    new_destination, new_distance = choose_destination(
+        location, all_coords, visited_locations
+    )
+    new_direction = get_direction(location, new_destination, all_coords)
+    log = (
+        f"<span>We set sail from {location}, heading {new_direction} "
+        f"to {new_destination}. </span>"
+    )
+    return new_destination, new_distance, log
 
 
 if __name__ == "__main__":
-    assert begins_with_vowel("Dog") == "a"
-    assert begins_with_vowel("Apple") == "an"
+    # check_wind
+    speed, description = check_wind(Captain())
+    assert type(speed) is float
+    if description:
+        assert description in [*data.wind_good, *data.wind_bad]
+
+    # calc_distance
+    assert calc_distance((1, 2), (2, 1)) == 97.69549216497437
+
+    # choose_destination
+    destination, distance = choose_destination("Tainan", data.place_coords, set())
+    assert destination == "Anping", destination
+    assert distance == 1, distance
+
+    destination, distance = choose_destination(
+        "Tainan", data.place_coords, set(["Anping"])
+    )
+    assert destination == "Wang-an", destination
+    assert distance == 60, distance
+
+    # get_direction
+    direction = get_direction("Tainan", "Anping", data.place_coords)
+    assert direction == "southeast", direction
+
+    # get_new_heading
+    captain = Captain()
+    ship = OurShip(captain)
+    destination, distance, log = get_new_heading(
+        data.place_names[0], data.place_coords, ship.visited
+    )
+    assert log.startswith("<span>") and log.endswith("</span>")
