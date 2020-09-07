@@ -1,4 +1,5 @@
 import random
+from collections.abc import MutableMapping
 from math import atan2, degrees, inf
 from typing import Tuple
 
@@ -9,21 +10,36 @@ from captains import Captain
 from ships import OurShip
 
 
-class RangeDict(dict):
-    """
-    Enables a dictionary whose keys are ranges.
+class RangeDict(MutableMapping):
+    """Enables a dictionary whose keys are ranges."""
 
-    Overrides `__getitem__` to handle keys that are ranges.
-    """
+    def __init__(self, iterable):
+        if not isinstance(iterable, dict):
+            raise TypeError('You must pass a dictionary to RangeDict')
 
-    def __getitem__(self, item):
-        if type(item) != range:
-            for key in self:
-                if item in key:
-                    return self[key]
-            raise KeyError(item)
-        else:
-            return super().__getitem__(item)
+        self.store = dict()
+
+        for (k, v) in iterable.items():
+            if not isinstance(k, range):
+                raise TypeError('Your dictionary keys must be ranges')
+
+            direction = {num: v for num in k}
+            self.store.update(direction)
+
+    def __getitem__(self, key):
+        return self.store[key]
+
+    def __setitem__(self, key, value):
+        self.store[key] = value
+
+    def __delitem__(self, key):
+        del self.store[key]
+
+    def __iter__(self):
+        return iter(self.store)
+
+    def __len__(self):
+        return len(self.store)
 
 
 # Would be quicker to have this as a 360-key dictionary, but this feels neater
