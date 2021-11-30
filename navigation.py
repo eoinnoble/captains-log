@@ -15,13 +15,13 @@ class RangeDict(MutableMapping):
 
     def __init__(self, iterable):
         if not isinstance(iterable, dict):
-            raise TypeError('You must pass a dictionary to RangeDict')
+            raise TypeError("You must pass a dictionary to RangeDict")
 
         self.store = dict()
 
         for (k, v) in iterable.items():
             if not isinstance(k, range):
-                raise TypeError('Your dictionary keys must be ranges')
+                raise TypeError("Your dictionary keys must be ranges")
 
             direction = {num: v for num in k}
             self.store.update(direction)
